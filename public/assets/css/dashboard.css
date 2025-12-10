@@ -1,0 +1,284 @@
+/* ==========================================
+   ESTILOS COMPARTIDOS DEL DASHBOARD (ADMIN Y STAFF)
+   ========================================== */
+
+/* 1. Fondo General */
+body.dashboard-body {
+    background-color: #f8f9fa; /* Gris muy suave, descansa la vista */
+    font-family: 'Comfortaa', sans-serif;
+}
+
+/* 2. Header Superior (Barra Blanca) */
+.header-dashboard {
+    background: #ffffff;
+    padding: 10px 0;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    z-index: 1000;
+}
+
+.header-dashboard .logo img {
+    max-height: 40px;
+}
+
+.header-dashboard .sitename {
+    font-size: 1.25rem; /* fs-4 */
+    color: var(--heading-color);
+    margin-left: 0.5rem;
+}
+
+/* 3. Tarjetas del Sistema (Cards) */
+.card-dashboard {
+    border: none;
+    border-radius: 12px;
+    background-color: #ffffff;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05); /* Sombra suave */
+    transition: transform 0.2s ease-in-out;
+}
+
+/* Efecto hover suave solo para tarjetas interactivas */
+.card-dashboard-interactive:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 15px rgba(0,0,0,0.1);
+}
+
+/* 4. Bordes de Acento (La línea de color arriba) */
+.border-top-accent {
+    border-top: 5px solid var(--accent-color) !important;
+}
+
+/* 5. Iconos Grandes */
+.icon-large {
+    font-size: 3.5rem;
+    color: var(--accent-color);
+}
+
+/* 6. Botones de Acción Principal */
+.btn-dashboard-primary {
+    background-color: var(--accent-color);
+    border: none;
+    color: #ffffff;
+    font-weight: 700; /* Bold */
+    padding: 12px 20px;
+    border-radius: 8px;
+    transition: all 0.3s;
+}
+
+.btn-dashboard-primary:hover {
+    background-color: color-mix(in srgb, var(--accent-color), transparent 15%);
+    color: #ffffff;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+
+/* 7. Sidebar (Solo se usará en Admin, pero lo dejamos aquí listo) */
+.sidebar {
+    min-height: calc(100vh - 70px); /* Resta la altura del header */
+    background-color: #ffffff;
+    border-right: 1px solid rgba(0,0,0,0.05);
+}
+
+.sidebar .nav-link {
+    color: var(--default-color);
+    font-weight: 500;
+    margin-bottom: 5px;
+    border-radius: 5px;
+    padding: 10px 15px;
+}
+
+.sidebar .nav-link:hover {
+    background-color: #f1f1f1;
+    color: var(--accent-color);
+}
+
+.sidebar .nav-link.active {
+    background-color: var(--accent-color);
+    color: #fff;
+}
+
+/* ==========================================
+   ESTILOS KDS (PANTALLA DE COCINA)
+   ========================================== */
+
+/* Fondo oscuro para descansar la vista en la cocina */
+body.kds-body {
+    background-color: #212529; /* Gris muy oscuro */
+    color: #fff;
+}
+
+/* El Ticket de Comanda */
+.kds-ticket {
+    background-color: #fff;
+    color: #333;
+    border-radius: 8px;
+    overflow: hidden;
+    border-top: 8px solid var(--accent-color); /* Color por defecto */
+    transition: all 0.3s ease;
+}
+
+/* Encabezado del Ticket */
+.ticket-header {
+    background-color: #f8f9fa;
+    padding: 10px 15px;
+    border-bottom: 2px dashed #dee2e6; /* Efecto de papel cortado */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: 700;
+}
+
+/* Cuerpo del Ticket */
+.ticket-body {
+    padding: 15px;
+}
+
+.ticket-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 5px 0;
+    border-bottom: 1px solid #f1f1f1;
+    font-size: 1.1rem;
+}
+
+/* Botón de Acción Grande */
+.btn-kds-action {
+    width: 100%;
+    border-radius: 0;
+    padding: 15px;
+    font-weight: 800;
+    text-transform: uppercase;
+    font-size: 1.2rem;
+}
+
+/* Variantes de Estado (Para accesibilidad visual) */
+.ticket-urgent { border-top-color: #dc3545; } /* Rojo */
+.ticket-new { border-top-color: #0d6efd; }    /* Azul */
+
+/* ==========================================
+   FIX MÓVIL: ORDEN Y VISIBILIDAD
+   ========================================== */
+
+/* 1. Evitar que el Logo y los Botones cambien de lugar en celular */
+@media (max-width: 1200px) {
+    .header-dashboard .logo {
+        order: 0 !important; /* El logo SIEMPRE va primero a la izquierda */
+        margin-right: auto;  /* Empuja todo lo demás a la derecha */
+    }
+    
+    .header-dashboard .d-flex {
+        order: 1 !important; /* Los botones de usuario van después */
+    }
+
+    /* Asegurar que el contenedor ocupe todo el ancho */
+    .header-dashboard .container-fluid {
+        justify-content: space-between !important;
+    }
+}
+
+/* ==========================================
+   ESTILOS MENÚ CLIENTE (menu.html)
+   ========================================== */
+
+/* 1. Píldoras de Categoría */
+.category-pill {
+    border-radius: 50px;
+    padding: 10px 20px;
+    border: 2px solid transparent;
+    background: #fff;
+    color: var(--default-color);
+    font-weight: 700;
+    transition: all 0.3s;
+    white-space: nowrap;
+    cursor: pointer;
+}
+
+.category-pill.active, 
+.category-pill:hover {
+    background: var(--accent-color);
+    color: #fff;
+    box-shadow: 0 4px 10px rgba(191, 90, 70, 0.3);
+    border-color: var(--accent-color);
+}
+
+/* 2. Scroll horizontal (estilo Instagram) para categorías */
+.category-scroll {
+    overflow-x: auto;
+    padding-bottom: 10px;
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+}
+
+.category-scroll::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera */
+}
+
+/* 3. Tarjeta de Comida */
+.food-card {
+    border: none;
+    border-radius: 15px;
+    overflow: hidden;
+    transition: transform 0.2s;
+    height: 100%;
+    background: #fff;
+    box-shadow: 0 2px 15px rgba(0,0,0,0.05);
+}
+
+.food-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+}
+
+.food-img-wrap {
+    height: 200px;
+    overflow: hidden;
+    position: relative;
+}
+
+.food-img-wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s;
+}
+
+.food-card:hover .food-img-wrap img {
+    transform: scale(1.05);
+}
+
+/* 4. Botón "+" Redondo */
+.btn-add {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    padding: 0;
+    transition: transform 0.2s;
+}
+
+.btn-add:active {
+    transform: scale(0.9);
+}
+
+/* 5. Botón Flotante del Carrito */
+.floating-cart {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 1000;
+    background: var(--accent-color);
+    color: white;
+    padding: 15px 25px;
+    border-radius: 50px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    transition: transform 0.2s;
+}
+
+.floating-cart:hover {
+    transform: scale(1.05);
+    color: white;
+}

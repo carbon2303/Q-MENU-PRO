@@ -1,0 +1,235 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Documentación API Q-Menu",
+        "description": "API para gestión de KDS y Menú de Restaurante",
+        "contact": {
+            "email": "s22030154@itsch.edu.mx"
+        },
+        "license": {
+            "name": "Apache 2.0",
+            "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+        },
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "http://laravel.test/q-menu/public",
+            "description": "Servidor Principal de la API"
+        }
+    ],
+    "paths": {
+        "/api/menu": {
+            "get": {
+                "tags": [
+                    "Menú"
+                ],
+                "summary": "Obtener el menú público",
+                "description": "Devuelve la lista de todos los platillos activos con su categoría.",
+                "operationId": "b33116df9781b937e030af4c454498e0",
+                "responses": {
+                    "200": {
+                        "description": "Operación exitosa. Devuelve un array de platillos.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/platillos": {
+            "post": {
+                "tags": [
+                    "Administración"
+                ],
+                "summary": "Crear un nuevo platillo",
+                "operationId": "a2c15dc3272666aa46e45ab8508dcc97",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "nombre",
+                                    "precio",
+                                    "categoria_id"
+                                ],
+                                "properties": {
+                                    "nombre": {
+                                        "type": "string",
+                                        "example": "Hamburguesa Suprema"
+                                    },
+                                    "precio": {
+                                        "type": "number",
+                                        "format": "float",
+                                        "example": 180.5
+                                    },
+                                    "descripcion": {
+                                        "type": "string",
+                                        "example": "Con tocino extra"
+                                    },
+                                    "imagen": {
+                                        "type": "string",
+                                        "example": "assets/img/portfolio/product-1.jpg"
+                                    },
+                                    "categoria_id": {
+                                        "type": "integer",
+                                        "example": 1
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Platillo creado exitosamente"
+                    },
+                    "401": {
+                        "description": "No autorizado (Falta Token)"
+                    },
+                    "403": {
+                        "description": "Prohibido (No es Admin)"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/platillos/{id}": {
+            "get": {
+                "tags": [
+                    "Administración"
+                ],
+                "summary": "Ver detalles de un platillo",
+                "operationId": "4c55eaf3c1249b1f2e665b03b7cd6829",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID del platillo",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Datos del platillo recuperados"
+                    },
+                    "404": {
+                        "description": "Platillo no encontrado"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "Administración"
+                ],
+                "summary": "Actualizar un platillo",
+                "operationId": "503272b4aced8230185044964bde9258",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "nombre": {
+                                        "type": "string",
+                                        "example": "Hamburguesa Modificada"
+                                    },
+                                    "precio": {
+                                        "type": "number",
+                                        "example": 190
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Platillo actualizado correctamente"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Administración"
+                ],
+                "summary": "Eliminar un platillo",
+                "operationId": "a92aa6c4f3dc4eb0f4f2ac889800c8ab",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Platillo eliminado"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        }
+    },
+    "components": {
+        "securitySchemes": {
+            "sanctum": {
+                "type": "http",
+                "description": "Ingrese el token obtenido en /login",
+                "bearerFormat": "JWT",
+                "scheme": "bearer"
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "Menú",
+            "description": "Menú"
+        },
+        {
+            "name": "Administración",
+            "description": "Administración"
+        }
+    ]
+}
